@@ -29,14 +29,11 @@ All the logic is defined here. The interesting functions are:
 
 - `getClues` - evaluates the guess assigning the "G", "Y" or "X" to each letter depending on if it was a correct letter in a correct position, a correct letter in incorrect position or a incorrect letter accordingly.
 - `filterWords` - filters out the words that can't satisfy the existing clues
-- `bestFirstGuess` - having a dictionary of words as an input returns the best first word. The 'best' is considered by testing every first word against all over words as a secret ones and comparing, what amount of words would be eliminated. Performs in O(n^3) operations on the strings of length 5 wich is quite slow.
+- `bestFirstGuess` - having a dictionary of words as an input returns the best first word. The 'best' is considered by testing every first word against all over words as a secret ones and comparing, what amount of words would be eliminated. Performs in O(n^3) operations on the strings of length 5 which is quite slow.
 
 ### Spec.hs
 
 The small amount of unit tests is located here. I used hspec.
-
-
-
 
 ## The Performance
 I didn't used any string libraries that improve performance yet, so without the BFG (Best First Guess) it flies even on a big dictionaries (2300+ words). With the BFG it takes about 0.2s on a 100-words dict, about 5 seconds on a 400-words dict. And it dies on a dict with 2300 words. 
