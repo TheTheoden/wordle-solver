@@ -9,9 +9,33 @@
 - Unit tests
 - Compute the best first word, meaning the word that ensures that you can guess any word from a dictionary in the minimum number of steps. Here the dictionary is a parameter.
 
+## How to launch
+
+I made my project with `stack new wordle-solver` + `stack setup` 
+
+So in order to run it you can use the `stack build` + `stack run <dict-location> <secret-word-location>`
+
+Where `<dict-location>` is the path to the dict of words separated by new lines and `<secret-word-location>` is a path to the file with a single line of a secret word.
+
 ## The Architecture
-The architecture of your solution.
-Why certain libraries were chosen.
+
+### Main.hs
+
+Contains the basic console interactions with user and the main loop of the game
+
+### WordleSolver.hs
+
+All the logic is defined here. The interesting functions are:
+
+- `getClues` - evaluates the guess assigning the "G", "Y" or "X" to each letter depending on if it was a correct letter in a correct position, a correct letter in incorrect position or a incorrect letter accordingly.
+- `filterWords` - filters out the words that can't satisfy the existing clues
+- `bestFirstGuess` - having a dictionary of words as an input returns the best first word. The 'best' is considered by testing every first word against all over words as a secret ones and comparing, what amount of words would be eliminated. Performs in O(n^3) operations on the strings of length 5 wich is quite slow.
+
+### Spec.hs
+
+The small amount of unit tests is located here. I used hspec.
+
+
 
 
 ## The Performance
