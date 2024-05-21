@@ -35,5 +35,14 @@ All the logic is defined here. The interesting functions are:
 
 The small amount of unit tests is located here. I used hspec.
 
+## The Libraries
+
+- `System` for basic interactions with IO and user
+- `Data.Char` for `isLower` to make sure that user uses lowercase in order to simplify checking
+- `Data.List` for `maximumBy` to find the BFG by comparing all the words in dictionary as the starting ones
+- `Data.Ord` for `comparing` to compare tuples by their second value, number of eliminated words in our case.
+- `Test.Hspec` for unit-testing
+
 ## The Performance
 I didn't used any string libraries that improve performance yet, so without the BFG (Best First Guess) it flies even on a big dictionaries (2300+ words). With the BFG it takes about 0.2s on a 100-words dict, about 5 seconds on a 400-words dict. And it dies on a dict with 2300 words. 
+I believe that the usage of unboxed strings would have increased the performance dramatically, but I'm not ready for it yet. 
