@@ -15,6 +15,8 @@ main = do
             wordList <- loadWords wordListFile
             secretWord <- loadSecretWord secretWordFile
             putStrLn "Begin"
+            let firstGuess = bestFirstGuess wordList
+            putStrLn $ "Best first guess: " ++ firstGuess
             gameLoop wordList secretWord
 
 -- Get input until the victory and update the possible words list

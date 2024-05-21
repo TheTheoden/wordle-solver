@@ -5,11 +5,14 @@ module WordleSolver (
     loadWords,
     loadSecretWord,
     prompt,
-    getValidInput
+    getValidInput,
+    bestFirstGuess
 ) where
 
 import System.IO (hFlush, stdout)
 import Data.Char (isLower)
+import Data.List (maximumBy)
+import Data.Ord (comparing)
 
 -- Print a prompt and get user input
 prompt :: String -> IO String
@@ -67,3 +70,13 @@ getValidInput promptText = do
         putStrLn $ "Error: " ++ err
         getValidInput promptText
       Right validInput -> return validInput
+
+-- Find the best first guess
+bestFirstGuess :: [String] -> String
+bestFirstGuess wordList =
+    fst $ maximumBy (comparing snd) $ map (\w -> (w, maxEliminationsForFirstGuess w)) wordList
+  where
+    maxEliminationsForFirstGuess secretWord =
+        maximum $ map (\firstGuess -> eliminationsForGuess secretWord firstGuess) wordList
+    eliminationsForGuess secretWord firstGuess =
+        length $ filterWords wordList (getClues secretWord firstGuess) firstGuess
