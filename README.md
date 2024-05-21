@@ -1,4 +1,4 @@
-# Wordle Solver 
+# Wordle Solver - The Report
 
 ## The Task
 
